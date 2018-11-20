@@ -1,6 +1,16 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.22.0",
+        "@symfony/webpack-encore": "^0.22.1",
+        "jquery": "^3.3.1",
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0",
+        "node-sass": "^4.10.0",
+        "sass-loader": "^7.1.0",
+        "stylus": "^0.54.5",
+        "stylus-loader": "^3.0.2",
+        "vue": "^2.5.17",
+        "vue-loader": "^14",
+        "vue-template-compiler": "^2.5.17",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",

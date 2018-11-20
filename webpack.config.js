@@ -1,4 +1,4 @@
-var Encore = require('@symfony/webpack-encore');
+    var Encore = require('@symfony/webpack-encore');
 
 Encore
     // directory where compiled assets will be stored
@@ -18,8 +18,21 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('plant', './assets/js/plant.js')
+    .addEntry('display', './assets/js/display.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
+    
+    // this creates a 'vendor.js' file with jquery and the bootstrap JS module
+    // these modules will *not* be included in page1.js or page2.js anymore
+    .createSharedEntry('vendor', [
+        'jquery',
+        'bootstrap',
+
+        // you can also extract CSS - this will create a 'vendor.css' file
+        // this CSS will *not* be included in page1.css or page2.css anymore
+        'bootstrap/scss/bootstrap.scss'
+    ])
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -39,13 +52,19 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+//    .enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+
+    // processes files ending in .less
+    .enableLessLoader()
+    
+    // processes files ending in .styl
+//    .enableStylusLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();
