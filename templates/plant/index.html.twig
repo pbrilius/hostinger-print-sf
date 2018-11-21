@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plant index{% endblock %}
+{% block title %}{% trans %}Plant index{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1 class="display-4">Plant index</h1>
+    <h1 class="display-4">{% trans %}Plant index{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Categoryname</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>actions</th>
+                <th>{% trans %}Categoryname{% endtrans %}</th>
+                <th>{% trans %}Createdat{% endtrans %}</th>
+                <th>{% trans %}Updatedat{% endtrans %}</th>
+                <th>{% trans %}actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,11 +29,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{% trans %}no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-primary btn-sm" href="{{ path('plant_new') }}">Create new</a>
+    <a class="btn btn-primary btn-sm" href="{{ path('plant_new') }}">{% trans %}Create new{% endtrans %}</a>
 {% endblock %}
