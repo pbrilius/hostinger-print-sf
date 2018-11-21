@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Plant
  *
  * @ORM\Table(name="plant", indexes={@ORM\Index(name="parentPlant", columns={"parentPlant"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Plant
 {
@@ -55,6 +55,27 @@ class Plant
      * })
      */
     private $parentplant;
+    
+    /**
+     *  @ORM\PreUpdate
+     */
+    public function setUpdatedAtOnPreUpdate()
+    {
+        $this->updatedat = new \DateTime();
+    }
+    
+    public function __toString()
+    {
+        return $this->categoryname;
+    }
+    
+    /**
+     *  @ORM\PrePersist
+     */
+    public function setCreatedAtOnPrePersist()
+    {
+        $this->createdat = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -108,6 +129,4 @@ class Plant
 
         return $this;
     }
-
-
 }
