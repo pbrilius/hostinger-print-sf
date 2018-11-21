@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -49,12 +50,24 @@ class Plant
     /**
      * @var \Plant
      *
-     * @ORM\ManyToOne(targetEntity="Plant")
+     * @ORM\ManyToOne(targetEntity="Plant", inversedBy="inheritingPlants", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parentPlant", referencedColumnName="id")
      * })
      */
     private $parentplant;
+    
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Plant", mappedBy="parentplant", orphanRemoval=true)
+     */
+    private $inheritingPlants;
+    
+    public function __construct()
+    {
+        $this->inheritingPlants = new ArrayCollection();
+    }
     
     /**
      *  @ORM\PreUpdate
