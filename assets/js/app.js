@@ -6,15 +6,11 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
+import '../css/app.css'
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-var $ = require('jquery');
+import $ from 'jquery';
 
-import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-
-Vue.use(BootstrapVue);
+import bootstrap from 'bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'

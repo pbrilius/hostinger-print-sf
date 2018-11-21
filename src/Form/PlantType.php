@@ -13,8 +13,6 @@ class PlantType extends AbstractType
     {
         $builder
             ->add('categoryname')
-            ->add('createdat')
-            ->add('updatedat')
             ->add('parentplant')
         ;
     }

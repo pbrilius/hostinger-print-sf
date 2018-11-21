@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Plant
@@ -25,6 +27,8 @@ class Plant
      * @var string|null
      *
      * @ORM\Column(name="categoryName", type="string", length=256, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Length(max=256)
      */
     private $categoryname;
 
