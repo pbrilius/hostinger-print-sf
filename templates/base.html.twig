@@ -4,18 +4,13 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <!-- if you extracted some CSS, include vendor.css -->
-            <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-            <!-- these two files now must be included in every page -->
-            <script src="{{ asset('build/manifest.js') }}"></script>
-            <script src="{{ asset('build/vendor.js') }}"></script>
-            <!-- here you link to the specific JS files needed by the current page -->
-            <script src="{{ asset('build/app.js') }}"></script>
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
 </html>

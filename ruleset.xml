@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<ruleset name="Generic HTTP applications"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                     http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="
+                     http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        A bunch that encompasses standard rulesets for code (backend)
+        checking in terms of HTTP web applications such as ecommerce -
+        efinance field industry sector
+    </description>
+
+    <!-- Import the entire unused code rule set -->
+    <rule ref="rulesets/cleancode.xml" />
+    <rule ref="rulesets/codesize.xml" />
+    <rule ref="rulesets/controversial.xml" />
+    <rule ref="rulesets/design.xml" >
+        <exclude name="CouplingBetweenObjects" />
+    </rule>
+    <!-- Adapt names length for primary key rules -->
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+        <exclude name="LongVariable" />
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortVariable" >
+        <properties>
+            <property name="exceptions" value="id" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable" >
+        <properties>
+            <property name="maximum" value="32" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/unusedcode.xml">
+        <exclude name="UnusedPrivateField" />
+    </rule>
+    <rule ref="rulesets/unusedcode.xml/UnusedPrivateField" >
+        <priority>5</priority>
+        <properties>
+            <property name="reportLevel" value="4" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects" >
+        <properties>
+            <property name="minimum" value="16" />
+        </properties>
+    </rule>
+</ruleset>

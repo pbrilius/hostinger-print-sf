@@ -22,17 +22,7 @@ Encore
     .addEntry('display', './assets/js/display.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-    
-    // this creates a 'vendor.js' file with jquery and the bootstrap JS module
-    // these modules will *not* be included in page1.js or page2.js anymore
-    .createSharedEntry('vendor', [
-        'jquery',
-        'bootstrap',
-
-        // you can also extract CSS - this will create a 'vendor.css' file
-        // this CSS will *not* be included in page1.css or page2.css anymore
-        'bootstrap/scss/bootstrap.scss'
-    ])
+    .enableVueLoader()
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -64,7 +54,7 @@ Encore
     .enableLessLoader()
     
     // processes files ending in .styl
-//    .enableStylusLoader()
+    .enableStylusLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();
