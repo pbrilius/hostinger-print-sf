@@ -1,0 +1,6 @@
+## YAML Template.
+---
+App\Entity\Plant:
+    plant_{1..20}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plant*'

@@ -2,33 +2,24 @@
 
 namespace App\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use App\Tests\CrudUtil\CrudTestInterface;
+use App\Tests\CrudUtil\CrudTestCase;
 
-class PlantControllerTest extends WebTestCase implements CrudTestInterface
+class PlantControllerTest extends CrudTestCase
 {
-    public function testDelete()
-    {
-    }
-
-    public function testEdit()
-    {
-    }
 
     public function testIndex()
     {
+        parent::testIndex();
+        
         $client = static::createClient();
         $crawler = $client->request('GET', '/plant/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('Plant Index', $crawler->filter('title')->text());
     }
-
+    
     public function testNew()
     {
-    }
-
-    public function testShow()
-    {
+        parent::testNew();
     }
 }
