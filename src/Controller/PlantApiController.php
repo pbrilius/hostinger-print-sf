@@ -27,12 +27,9 @@ class PlantApiController extends AbstractRestController
         $plants = $this->getDoctrine()
             ->getRepository(Plant::class)
             ->findAll();
-        var_dump($plants);
-//        die;
-        return new JsonResponse($plants);
-        
+
         $serializer = $this->getSerializer();
         
-        return $serializer->serialize($plants, 'json');
+        return new JsonResponse($serializer->normalize($plants));
     }
 }

@@ -9,13 +9,13 @@ class PlantApiControllerTest extends RestTestCase
     public function testDisplayList()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/api/plant/');
+        $client->request('GET', '/api/plant/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         /* @var $serializer Serializer */
         $serializer = $this->getSerializer();
-        $decodedResponse = $serializer->deserialize(
-            $crawler
+        $decodedResponse = $serializer->decode(
+            $client
                     ->getResponse()
                     ->getContent(),
             'json'
