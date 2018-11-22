@@ -7,45 +7,32 @@
 namespace App\Controller;
 
 use App\RestUtil\AbstractRestController;
-use App\RestUtil\RestControllerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Plant;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Description of PlantApiController
  *
  * @author Povilas Brilius <pbrilius@gmail.com>
+ * @Route("/api/plant")
  */
-class PlantApiController extends AbstractRestController implements RestControllerInterface
+class PlantApiController extends AbstractRestController
 {
     /**
-     * @Route("/", name="plant_index", methods="GET,HEAD")
+     * @Route("/", name="plant_api_index", methods={"GET","HEAD"})
      */
     public function displayList()
     {
         $plants = $this->getDoctrine()
             ->getRepository(Plant::class)
             ->findAll();
+        var_dump($plants);
+//        die;
+        return new JsonResponse($plants);
+        
         $serializer = $this->getSerializer();
         
-        return $serializer->encode($plants, 'json');
-    }
-    
-    public function delete(int $id)
-    {
-        $id = null;
-    }
-
-    public function display(int $id)
-    {
-        $id = null;
-    }
-    
-    public function insert()
-    {
-    }
-
-    public function update(int $id)
-    {
-        $id = null;
+        return $serializer->serialize($plants, 'json');
     }
 }

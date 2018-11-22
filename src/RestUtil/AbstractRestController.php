@@ -49,4 +49,27 @@ class AbstractRestController extends AbstractController implements RestControlle
     {
         $this->serializer = $serializer;
     }
+    
+    public function delete(int $id)
+    {
+        $id = null;
+    }
+
+    public function display(int $id)
+    {
+        $id = null;
+    }
+
+    public function displayList()
+    {
+    }
+
+    public function insert()
+    {
+    }
+
+    public function update(int $id)
+    {
+        $id = null;
+    }
 }

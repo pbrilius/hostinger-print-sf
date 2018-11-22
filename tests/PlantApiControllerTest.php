@@ -2,16 +2,24 @@
 
 namespace App\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\RestUtil\RestTestCase;
 
-class PlantApiControllerTest extends WebTestCase
+class PlantApiControllerTest extends RestTestCase
 {
-    public function testSomething()
+    public function testDisplayList()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/api/plant/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Hello World', $crawler->filter('h1')->text());
+        /* @var $serializer Serializer */
+        $serializer = $this->getSerializer();
+        $decodedResponse = $serializer->deserialize(
+            $crawler
+                    ->getResponse()
+                    ->getContent(),
+            'json'
+        );
+        $this->assertGreaterThan(0, count($decodedResponse));
     }
 }
