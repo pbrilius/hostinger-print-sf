@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -140,6 +141,17 @@ class Plant
     {
         $this->parentplant = $parentplant;
 
+        return $this;
+    }
+    
+    public function getInheritingPlants(): Collection
+    {
+        return $this->inheritingPlants;
+    }
+
+    public function setInheritingPlants(ArrayCollection $inheritingPlants)
+    {
+        $this->inheritingPlants = $inheritingPlants;
         return $this;
     }
 }
