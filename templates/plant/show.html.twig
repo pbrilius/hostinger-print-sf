@@ -16,6 +16,10 @@
                 <td>{{ plant.categoryname }}</td>
             </tr>
             <tr>
+                <th>{% trans %}Parentplant{% endtrans %}</th>
+                <td>{{ plant.parentplant }}</td>
+            </tr>
+            <tr>
                 <th>{% trans %}Createdat{% endtrans %}</th>
                 <td>{{ plant.createdat ? plant.createdat|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

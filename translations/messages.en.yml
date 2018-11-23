@@ -1,0 +1,20 @@
+Categoryname: 'Category Name'
+Parentplant: 'Parent Plant'
+Delete: Delete
+Createdat: 'Created At'
+Updatedat: 'Updated At'
+actions: actions
+'no records found': 'no records found'
+'back to list': 'back to list'
+'Plant index': 'Plant Index'
+'Create new': 'Create New'
+Plant: Plant
+Id: Id
+edit: edit
+'Edit Plant': 'Edit Plant'
+'New Plant': 'New Plant'
+'Create new Plant': 'Create new Plant'
+'Plant Display': 'Plant Display'
+'Recursive display order': 'Recursive display order'
+'Iterative display order': 'Iterative display order'
+'Plants Display': '__Plants Display'

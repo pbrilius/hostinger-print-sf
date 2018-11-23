@@ -1,6 +1,8 @@
 ## YAML Template.
 ---
 App\Entity\Plant:
-    plant_{1..20}:
+    plantNotInheriting_{1..4}:
         categoryname: <company()> <companySuffix()>
-        parentplant: '@plant*'
+    plant_{5..20}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plantNotInheriting_*'
