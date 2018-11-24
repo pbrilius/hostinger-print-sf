@@ -16,15 +16,6 @@
             {% endif %}
         </li>
     {% endmacro %}
-    {% macro bfsIteration(level, node) %}
-        {% set s = 1 %}
-        {% set investigativeNodeLevel = node %}
-        {% for i in s..level %}
-            {% for plant in node %}
-                <h4><a href="{{ path('plant_show', {'id': plant.id}) }}">{{ plant.categoryname }}</a></h4>
-            {% endfor %}
-        {% endfor %}
-    {% endmacro %}
     <h1 class="display-4">{% trans %}Plant Display{% endtrans %}</h1>
     {% if plants %}
         <h2>{% trans %}Recursive display order{% endtrans %}</h2>
@@ -38,9 +29,7 @@
         <h2>{% trans %}Iterative display order{% endtrans %}</h2>
         <div id="plants-iterative">
             <ul>
-               {% for plant in plants %}
-                   {{ plantRendinator.bfsIteration(1, [plant]) }}
-               {% endfor %}
+               {{ bfsIteration(plants) | raw }}
             </ul>
         </div>
     {% endif %}
