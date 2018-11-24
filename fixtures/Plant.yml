@@ -1,6 +1,17 @@
 ## YAML Template.
 ---
 App\Entity\Plant:
-    plant_{1..20}:
+    plantLevel1_{1..4}:
         categoryname: <company()> <companySuffix()>
-        parentplant: '@plant*'
+    plantLevel2_{5..10}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plantLevel1_*'
+    plantLevel3_{11..14}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plantLevel2_*'
+    plantLevel4_{15..18}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plantLevel3_*'
+    plantLevel5_{19..20}:
+        categoryname: <company()> <companySuffix()>
+        parentplant: '@plantLevel4_*'
