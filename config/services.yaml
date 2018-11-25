@@ -34,3 +34,7 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+
+knp_menu:
+    twig:
+        template: menu/menu_template.html.twig

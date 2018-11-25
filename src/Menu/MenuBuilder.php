@@ -33,6 +33,14 @@ class MenuBuilder
         
         $menu->addChild('Plants', ['route' => 'plant_index']);
         $menu['Plants']->addChild('Add Plant', ['route' => 'plant_new']);
+        
+        $menu->setChildrenAttribute('class', 'navbar-nav');
+        // menu items
+        foreach ($menu as $child) {
+            $child
+                ->setLinkAttribute('class', 'nav-link')
+                ->setAttribute('class', 'nav-item');
+        }
 
         return $menu;
     }

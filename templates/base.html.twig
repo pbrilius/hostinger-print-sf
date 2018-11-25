@@ -8,7 +8,9 @@
         {% endblock %}
     </head>
     <body>
-        {{ knp_menu_render('main') }}
+        <nav class="navbar navbar-nav">
+            {{ knp_menu_render('main') }}
+        </nav>
         <div class="jumbotron">
             {% block body %}{% endblock %}
             {% block javascripts %}
