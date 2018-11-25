@@ -21,6 +21,7 @@ class AppExtension extends AbstractExtension
     const PLANT_ELEMENT_TAG = 'li';
     const PLANT_HEADER_TAG = 'h4';
     const PLANT_LINK_TAG = 'a';
+    const PLANT_ELEMENT_ID_ATTRIBUTE = 'data-id';
     
     public function getFunctions()
     {
@@ -32,23 +33,15 @@ class AppExtension extends AbstractExtension
     private function shiftStack($stack): ?array
     {
         $shiftedStack = [];
-        var_dump(count($stack));
-//        exit;
         foreach ($stack as $plant) {
-            var_dump(get_class($plant));
-            var_dump(get_class($plant->getInheritingplants()));
-            var_dump(count($plant->getInheritingplants()->getSnapshot()));
-//            exit;
             if (!$plant->getInheritingPlants()->getSnapshot()) {
                 continue;
             }
-//            continue;
-            var_dump(count($plant->getInheritingplants()->getSnapshot()));
-            $shiftedStack += $plant->getInheritingplants()->getSnapshot();
-            continue;
-            array_push($shiftedStack, $plant->getInheritingplants()->getSnapshot());
+            foreach ($plant->getInheritingPlants()->getSnapshot() as $plant) {
+                array_push($shiftedStack, $plant);
+            }
         }
-//        exit;
+
         return $shiftedStack;
     }
     
@@ -56,9 +49,10 @@ class AppExtension extends AbstractExtension
     {
         $compoundDoc = new \DOMDocument();
         $list = $compoundDoc->createElement(self::PLANT_COMPOUND_TAG);
-        var_dump(count($plants));
+
         foreach ($plants as $plant) {
             $element = $compoundDoc->createElement(self::PLANT_ELEMENT_TAG);
+            $element->setAttribute('data-id', $plant->getId());
             $header = $compoundDoc->createElement(self::PLANT_HEADER_TAG);
             $link = $compoundDoc->createElement(self::PLANT_LINK_TAG, $plant->getCategoryname());
             $link->setAttribute('href', $this->denormativePath($plant));
@@ -66,27 +60,18 @@ class AppExtension extends AbstractExtension
             $element->appendChild($header);
             $list->appendChild($element);
         }
-//        $compoundDoc->appendChild($list);
-        var_dump($list->C14N());
-        var_dump($compoundDoc->C14N());
-        var_dump($compoundDoc->documentElement);
-//        exit;
-//        return $doc;
+        $compoundDoc->appendChild($list);
         $xpath = new \DOMXPath($doc);
         $elements = $xpath->query($query);
-        var_dump($elements);
-//        exit;
-//        $elements->item(0)->appendChild($compoundDoc);
-//        var_dump($elements->item(0)->C14N());
+        $compoundList = $compoundDoc
+                ->getElementsByTagName(self::PLANT_COMPOUND_TAG)
+                ->item(0);
         foreach ($elements as $element) {
-            var_dump($element);
-//            exit;
             $element->appendChild(
-                $doc->importNode($list, true)
+                $doc->importNode($compoundList, true)
             );
-            var_dump($element->C14N());
         }
-//        exit;
+
         return $doc;
     }
     
@@ -100,37 +85,29 @@ class AppExtension extends AbstractExtension
     
     public function bfsDisplayIterative($plants)
     {
-        var_dump(get_class($plants[0]));
-//        exit;
         $initialQuery = '/';
-        $shiftLevel = 0;
-//        $plantCompound = $doc->createElement(self::PLANT_COMPOUND_TAG);
-//        $doc->appendChild($plantCompound);
-        $doc = $this->addInheritingPlants((new \DOMDocument()), $plants, $initialQuery);
-        $inheritingPlants = $plants;
-        $shiftLevelQuery = $initialQuery . self::PLANT_COMPOUND_TAG;
-        while ($inheritingPlants) {
-            $shiftLevel++;
-            for ($i = 0, $c = count($inheritingPlants); $i < $c; $i++) {
-                if (!$plants[$i]->getInheritingplants()) {
-                    continue;
-                }
+        $shiftLevelQuery = $initialQuery;
+        $doc = new \DOMDocument();
+        $this->addInheritingPlants($doc, $plants, $initialQuery);
+        while ($plants) {
+            $shiftLevelQuery .= self::PLANT_COMPOUND_TAG . '/';
+            for ($i = 0, $c = count($plants); $i < $c; $i++) {
                 $query = $shiftLevelQuery
-                        . '/'
                         . self::PLANT_ELEMENT_TAG
-                        . '['
-                        . $i
-                        . ']';
+                        . '[@'
+                        . self::PLANT_ELEMENT_ID_ATTRIBUTE
+                        . '="'
+                        . $plants[$i]->getId()
+                        . '"]';
                 $doc = $this
                         ->addInheritingPlants(
                             $doc,
-                            $plants[$i]->getInheritingplants()->getSnapshot(),
+                            $plants[$i]->getInheritingPlants()->getSnapshot(),
                             $query
                         );
             }
-            $shiftLevelQuery .= '/' . self::PLANT_COMPOUND_TAG;
-//            exit;
-            $inheritingPlants = $this->shiftStack($inheritingPlants);
+            $shiftLevelQuery .= self::PLANT_ELEMENT_TAG . '/';
+            $plants = $this->shiftStack($plants);
         }
         return $doc->C14N();
     }

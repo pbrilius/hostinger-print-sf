@@ -28,9 +28,7 @@
         </div>
         <h2>{% trans %}Iterative display order{% endtrans %}</h2>
         <div id="plants-iterative">
-            <ul>
-               {{ bfsIteration(plants) | raw }}
-            </ul>
+            {{ bfsIteration(plants) | raw }}
         </div>
     {% endif %}
 {% endblock %}
