@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="plant", indexes={@ORM\Index(name="parentPlant", columns={"parentPlant"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
+ * @Assert\GroupSequence({"Plant", "Strict"})
  */
 class Plant
 {
@@ -81,6 +82,14 @@ class Plant
     public function __toString()
     {
         return $this->categoryname;
+    }
+    
+    /**
+     * @Assert\IsFalse(message="Parent plant cannot reference plant", groups={"Strict"})
+     */
+    public function isReferencingSelf()
+    {
+        return (!is_null($this->parentplant) && $this->getId() == $this->parentplant->getId());
     }
     
     /**
