@@ -14,8 +14,7 @@ class PlantType extends AbstractType
     {
         $builder
             ->add('categoryname')
-            ->add('parentplant')
-        ;
+            ->add('parentplant');
     }
 
     public function configureOptions(OptionsResolver $resolver)

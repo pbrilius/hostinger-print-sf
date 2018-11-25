@@ -36,8 +36,15 @@
     </rule>
     <rule ref="rulesets/unusedcode.xml">
         <exclude name="UnusedPrivateField" />
+        <exclude name="UnusedFormalParameter" />
     </rule>
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateField" >
+        <priority>5</priority>
+        <properties>
+            <property name="reportLevel" value="4" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter" >
         <priority>5</priority>
         <properties>
             <property name="reportLevel" value="4" />
