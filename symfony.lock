@@ -14,6 +14,12 @@
             "ref": "71822522faf7ed2792d86b7f94ce73443358ccb9"
         }
     },
+    "knplabs/knp-menu": {
+        "version": "2.3.0"
+    },
+    "knplabs/knp-menu-bundle": {
+        "version": "v2.2.1"
+    },
     "myclabs/deep-copy": {
         "version": "1.8.1"
     },
