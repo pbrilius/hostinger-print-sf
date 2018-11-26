@@ -4,7 +4,7 @@
 composer install
 yarn install
 ```
-Set database credentials in [.env], encoding database username and password
+Set database credentials in .env, encoding database username and password
 by urlencode().
 
 Create database schema:
