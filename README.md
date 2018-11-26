@@ -22,6 +22,11 @@ Generate some sample data:
 bin/console hautelook:fixtures:load
 ```
 
+Unit cases:
+```
+bin/phpunit
+```
+
 # Possible improvements
 
 * Bootstrap Knp menu theme, for now abated, as gist examples not correctly
