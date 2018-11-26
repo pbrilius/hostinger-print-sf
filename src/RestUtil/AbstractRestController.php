@@ -11,6 +11,9 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\RestUtil\RestControllerInterface;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
  * Description of AbstractRestController
@@ -32,11 +35,18 @@ class AbstractRestController extends AbstractController implements RestControlle
 
     private function setUpSerializer()
     {
-        $encoders    = array(new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
+        $encoder    = new JsonEncoder();
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $normalizer->setIgnoredAttributes(['inheritingPlants']);
+        $normalizers = [$normalizer];
+        $normalizers[0]->setCircularReferenceHandler(function ($object) {
+            return $object->getCategoryname();
+        });
+        $normalizers[0]->setCircularReferenceLimit(4);
+        $encoders    = [$encoder];
+        $serializer  = new Serializer($normalizers, $encoders);
 
-        $serializer = new Serializer($normalizers, $encoders);
-        
         $this->setSerializer($serializer);
     }
     

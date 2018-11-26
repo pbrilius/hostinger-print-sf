@@ -2,16 +2,18 @@
 
 namespace App\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\CrudUtil\CrudTestCase;
 
-class DisplayControllerTest extends WebTestCase
+class DisplayControllerTest extends CrudTestCase
 {
-    public function testSomething()
+    public function testIndex()
     {
+        parent::testIndex();
+        
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/display');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Hello World', $crawler->filter('h1')->text());
+        $this->assertContains('Plants Display', $crawler->filter('title')->text());
     }
 }

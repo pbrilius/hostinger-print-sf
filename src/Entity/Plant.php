@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * Plant
@@ -56,6 +57,7 @@ class Plant
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="parentPlant", referencedColumnName="id")
      * })
+     * @MaxDepth(16)
      */
     private $parentplant;
     
@@ -63,6 +65,7 @@ class Plant
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Plant", mappedBy="parentplant", orphanRemoval=true)
+     * @MaxDepth(2)
      */
     private $inheritingPlants;
     

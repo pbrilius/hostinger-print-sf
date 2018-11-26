@@ -37,9 +37,14 @@ abstract class RestTestCase extends WebTestCase implements RestTestInterface
     
     private function setUpSerializer()
     {
-        $encoders    = array(new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
-
+        $encoder    = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getCategoryname();
+        });
+        $normalizer->setCircularReferenceLimit(16);
+        $encoders    = [$encoder];
+        $normalizers = [$normalizer];
         $serializer = new Serializer($normalizers, $encoders);
         
         $this->setSerializer($serializer);

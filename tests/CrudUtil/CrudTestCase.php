@@ -8,7 +8,6 @@ namespace App\Tests\CrudUtil;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\CrudUtil\CrudTestInterface;
-use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 
 /**
  * Description of CrudTestCase
@@ -17,7 +16,6 @@ use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
  */
 abstract class CrudTestCase extends WebTestCase implements CrudTestInterface
 {
-    use RefreshDatabaseTrait;
     
     public function testDelete()
     {

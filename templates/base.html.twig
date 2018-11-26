@@ -8,9 +8,12 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-nav">
-            {{ knp_menu_render('main') }}
-        </nav>
+        <div class="jumbotron">
+            <nav class="navbar navbar-nav float-left">
+                {{ knp_menu_render('main') }}
+            </nav>
+        </div>
+        <div class="clearfix">...</div>
         <div class="jumbotron">
             {% block body %}{% endblock %}
             {% block javascripts %}
