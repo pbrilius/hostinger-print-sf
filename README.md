@@ -21,7 +21,10 @@ Generate some sample data:
 ```
 bin/console hautelook:fixtures:load
 ```
-
+Run it:
+```
+yarn encore dev-server
+```
 # Possible improvements
 
 * Bootstrap Knp menu theme, for now abated, as gist examples not correctly
