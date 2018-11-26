@@ -4,7 +4,7 @@
 composer install
 yarn install
 ```
-Set database credentials in [.env], encoding database username and password
+Set database credentials in .env, encoding database username and password
 by urlencode().
 
 Create database schema:
@@ -20,6 +20,11 @@ bin/console doctrine:schema:validate
 Generate some sample data:
 ```
 bin/console hautelook:fixtures:load
+```
+
+Run it:
+```
+yarn encore dev-server
 ```
 
 Unit cases:
